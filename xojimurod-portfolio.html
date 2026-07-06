@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xojimurod Xalimjonov — AI / ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0B0F;
+    --bg-elevated:#101219;
+    --surface:#151822;
+    --surface-2:#1B1E29;
+    --border:#242732;
+    --border-soft:#1C1F29;
+    --text:#EDEEF2;
+    --text-dim:#9096A5;
+    --text-faint:#575C6B;
+    --blue:#5B8CFF;
+    --blue-dim:rgba(91,140,255,0.12);
+    --coral:#FF6B5B;
+    --coral-dim:rgba(255,107,91,0.12);
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(circle at 15% 8%, rgba(91,140,255,0.10), transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(255,107,91,0.07), transparent 40%),
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size:auto,auto,44px 44px,44px 44px;
+    pointer-events:none;
+    z-index:0;
+  }
+  h1,h2,h3,.font-display{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--blue);color:#fff;}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;position:relative;z-index:1;}
+
+  /* NAV */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    backdrop-filter:blur(14px);
+    background:rgba(10,11,15,0.72);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .nav-inner{max-width:1120px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-family:'Space Grotesk';font-weight:700;font-size:15px;letter-spacing:0.02em;}
+  .logo span{color:var(--blue);}
+  .nav-links{display:flex;gap:28px;list-style:none;}
+  .nav-links a{font-size:13.5px;color:var(--text-dim);transition:color .2s;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-right{display:flex;align-items:center;gap:16px;}
+  .lang-toggle{
+    display:flex;background:var(--surface);border:1px solid var(--border);
+    border-radius:999px;padding:3px;font-family:'JetBrains Mono';font-size:11px;
+    cursor:pointer;user-select:none;
+  }
+  .lang-toggle button{
+    border:none;background:transparent;color:var(--text-faint);padding:6px 12px;
+    border-radius:999px;font-family:'JetBrains Mono';font-size:11px;cursor:pointer;transition:all .2s;
+  }
+  .lang-toggle button.active{background:var(--blue);color:#fff;}
+  .nav-cta{
+    background:var(--text);color:var(--bg);padding:8px 16px;border-radius:8px;
+    font-size:13px;font-weight:600;transition:opacity .2s;
+  }
+  .nav-cta:hover{opacity:.85;}
+  .burger{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;}
+
+  @media(max-width:860px){
+    .nav-links{display:none;}
+    .burger{display:block;}
+  }
+
+  /* HERO */
+  .hero{padding:168px 0 90px;position:relative;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono';font-size:12px;color:var(--blue);
+    background:var(--blue-dim);border:1px solid rgba(91,140,255,0.25);
+    padding:6px 14px;border-radius:999px;margin-bottom:28px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;}}
+  h1.headline{
+    font-size:clamp(34px,5vw,54px);font-weight:700;line-height:1.08;letter-spacing:-0.01em;
+    margin-bottom:22px;
+  }
+  h1.headline .accent{color:var(--blue);}
+  .hero-sub{font-size:16.5px;line-height:1.7;color:var(--text-dim);max-width:560px;margin-bottom:34px;}
+  .hero-name{font-size:14px;color:var(--text-faint);margin-bottom:6px;font-family:'JetBrains Mono';}
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px;}
+  .btn{padding:13px 26px;border-radius:9px;font-size:14px;font-weight:600;transition:all .2s;display:inline-block;}
+  .btn-primary{background:var(--blue);color:#fff;}
+  .btn-primary:hover{background:#4577f2;transform:translateY(-1px);}
+  .btn-ghost{border:1px solid var(--border);color:var(--text);}
+  .btn-ghost:hover{border-color:var(--text-faint);}
+  .stat-row{display:flex;gap:38px;flex-wrap:wrap;}
+  .stat b{font-family:'Space Grotesk';font-size:26px;display:block;}
+  .stat span{font-size:12.5px;color:var(--text-faint);}
+
+  /* decision boundary visual */
+  .viz-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:22px;position:relative;overflow:hidden;
+  }
+  .viz-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .viz-label span{font-family:'JetBrains Mono';font-size:11px;color:var(--text-faint);}
+  .legend{display:flex;gap:16px;margin-top:14px;font-family:'JetBrains Mono';font-size:11px;color:var(--text-dim);}
+  .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;}
+  svg.boundary{width:100%;height:auto;display:block;}
+
+  /* SECTION generic */
+  section{padding:104px 0;position:relative;border-top:1px solid var(--border-soft);}
+  .sec-head{margin-bottom:52px;max-width:640px;}
+  .sec-eyebrow{font-family:'JetBrains Mono';font-size:12px;color:var(--coral);margin-bottom:12px;letter-spacing:0.03em;}
+  .sec-title{font-size:clamp(24px,3.4vw,34px);font-weight:700;letter-spacing:-0.01em;}
+  .sec-desc{color:var(--text-dim);margin-top:14px;font-size:15px;line-height:1.7;}
+
+  /* ABOUT */
+  .about-text p{color:var(--text-dim);font-size:16px;line-height:1.85;margin-bottom:18px;max-width:760px;}
+  .about-text strong{color:var(--text);font-weight:600;}
+
+  /* EXPERIENCE timeline */
+  .timeline{position:relative;padding-left:28px;}
+  .timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:linear-gradient(var(--blue),var(--border) 90%);}
+  .t-item{position:relative;padding-bottom:44px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{content:"";position:absolute;left:-28px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--blue);}
+  .t-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+  .t-role{font-size:17px;font-weight:600;font-family:'Space Grotesk';}
+  .t-org{color:var(--blue);font-size:14px;font-weight:500;}
+  .t-date{font-family:'JetBrains Mono';font-size:12px;color:var(--text-faint);white-space:nowrap;}
+  .t-loc{font-size:12.5px;color:var(--text-faint);margin-bottom:12px;}
+  .t-list{list-style:none;}
+  .t-list li{color:var(--text-dim);font-size:14.5px;line-height:1.7;padding-left:16px;position:relative;}
+  .t-list li::before{content:"—";position:absolute;left:0;color:var(--text-faint);}
+
+  /* PROJECTS */
+  .proj-group-title{font-family:'JetBrains Mono';font-size:12.5px;color:var(--text-faint);margin:0 0 22px;text-transform:uppercase;letter-spacing:.04em;}
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:56px;}
+  @media(max-width:760px){.proj-grid{grid-template-columns:1fr;}}
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:26px;transition:transform .25s, border-color .25s;
+  }
+  .card:hover{transform:translateY(-3px);border-color:#33384a;}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
+  .card-title{font-family:'Space Grotesk';font-size:18px;font-weight:600;}
+  .badge{font-family:'JetBrains Mono';font-size:10.5px;color:var(--blue);background:var(--blue-dim);padding:4px 9px;border-radius:6px;white-space:nowrap;}
+  .badge.coral{color:var(--coral);background:var(--coral-dim);}
+  .card-role{font-size:12.5px;color:var(--text-faint);margin-bottom:12px;font-family:'JetBrains Mono';}
+  .card-desc{font-size:14.5px;color:var(--text-dim);line-height:1.7;margin-bottom:16px;}
+  .tech-row{display:flex;flex-wrap:wrap;gap:7px;}
+  .tech{font-size:11px;font-family:'JetBrains Mono';color:var(--text-dim);border:1px solid var(--border);padding:4px 9px;border-radius:6px;}
+
+  /* HACKATHONS */
+  .hack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  @media(max-width:900px){.hack-grid{grid-template-columns:repeat(2,1fr);}}
+  .hack-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;text-align:left;}
+  .hack-rank{font-family:'Space Grotesk';font-size:24px;font-weight:700;color:var(--blue);margin-bottom:10px;}
+  .hack-name{font-size:14.5px;font-weight:600;margin-bottom:4px;}
+  .hack-desc{font-size:12.5px;color:var(--text-faint);line-height:1.5;}
+  .award-strip{
+    margin-top:24px;display:flex;align-items:center;gap:16px;background:linear-gradient(90deg,var(--coral-dim),transparent);
+    border:1px solid rgba(255,107,91,0.25);border-radius:var(--radius);padding:20px 24px;
+  }
+  .award-strip .ic{font-size:26px;}
+  .award-strip b{font-family:'Space Grotesk';font-size:15px;display:block;}
+  .award-strip span{font-size:13px;color:var(--text-dim);}
+
+  /* SKILLS */
+  .skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media(max-width:760px){.skill-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:520px){.skill-grid{grid-template-columns:1fr;}}
+  .skill-cat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;}
+  .skill-cat h4{font-family:'JetBrains Mono';font-size:11.5px;color:var(--coral);margin-bottom:14px;text-transform:uppercase;letter-spacing:.03em;}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:7px;}
+  .skill-tags span{font-size:12px;color:var(--text-dim);background:var(--surface-2);padding:5px 10px;border-radius:6px;}
+
+  /* CONTACT / FOOTER */
+  .contact-box{
+    background:var(--surface);border:1px solid var(--border);border-radius:20px;
+    padding:64px 48px;text-align:center;
+  }
+  .contact-box h2{font-size:clamp(26px,4vw,40px);margin-bottom:16px;}
+  .contact-box p{color:var(--text-dim);margin-bottom:34px;font-size:15.5px;}
+  .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:8px;}
+  .clink{
+    border:1px solid var(--border);padding:11px 20px;border-radius:9px;font-size:13.5px;
+    display:flex;align-items:center;gap:8px;transition:.2s;
+  }
+  .clink:hover{border-color:var(--blue);color:var(--blue);}
+  footer{padding:32px 0;text-align:center;color:var(--text-faint);font-size:12.5px;border-top:1px solid var(--border-soft);}
+
+  [data-i18n]{transition:opacity .15s;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">XOJIMUROD<span>.DEV</span></div>
+    <ul class="nav-links">
+      <li><a href="#about" data-i18n data-uz="Men haqimda" data-en="About">Men haqimda</a></li>
+      <li><a href="#experience" data-i18n data-uz="Tajriba" data-en="Experience">Tajriba</a></li>
+      <li><a href="#work" data-i18n data-uz="Loyihalar" data-en="Work">Loyihalar</a></li>
+      <li><a href="#hackathons" data-i18n data-uz="Yutuqlar" data-en="Recognition">Yutuqlar</a></li>
+      <li><a href="#skills" data-i18n data-uz="Ko'nikmalar" data-en="Skills">Ko'nikmalar</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-toggle" id="langToggle">
+        <button data-lang="uz" class="active">UZ</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <a href="#contact" class="nav-cta" data-i18n data-uz="Bog'lanish" data-en="Contact">Bog'lanish</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>
+        <span data-i18n data-uz="Sun'iy intellekt muhandisi — Toshkent, O'zbekiston" data-en="AI / ML Engineer — Tashkent, Uzbekistan">Sun'iy intellekt muhandisi — Toshkent, O'zbekiston</span>
+      </div>
+      <div class="hero-name">XOJIMUROD XALIMJONOV</div>
+      <h1 class="headline" data-i18n
+        data-uz='Ma&#8217;lumotlarni <span class="accent">qaror qabul qiluvchi</span> modellarga aylantiraman.'
+        data-en='Turning raw data into <span class="accent">models that decide.</span>'>
+        Ma&#8217;lumotlarni <span class="accent">qaror qabul qiluvchi</span> modellarga aylantiraman.
+      </h1>
+      <p class="hero-sub" data-i18n
+        data-uz="Senior AI/ML muhandisi. NLP, xavflarni aniqlash va sanoat avtomatlashtiruvi bo'yicha to'liq tsikldagi AI tizimlarini quraman — backend, model va foydalanuvchi interfeysigacha — O'zbekiston va xalqaro kompaniyalar uchun."
+        data-en="Senior AI/ML Engineer building full-cycle AI systems for NLP, risk detection, and industrial automation — from backend to model to the interface on top — for companies in Uzbekistan and abroad.">
+        Senior AI/ML muhandisi. NLP, xavflarni aniqlash va sanoat avtomatlashtiruvi bo'yicha to'liq tsikldagi AI tizimlarini quraman — backend, model va foydalanuvchi interfeysigacha — O'zbekiston va xalqaro kompaniyalar uchun.
+      </p>
+      <div class="btn-row">
+        <a href="#work" class="btn btn-primary" data-i18n data-uz="Loyihalarni ko'rish" data-en="View my work">Loyihalarni ko'rish</a>
+        <a href="#contact" class="btn btn-ghost" data-i18n data-uz="Bog'lanish" data-en="Get in touch">Bog'lanish</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>7+</b><span data-i18n data-uz="ishlab chiqarishga joriy etilgan AI tizim" data-en="AI systems shipped to production">ishlab chiqarishga joriy etilgan AI tizim</span></div>
+        <div class="stat"><b>6</b><span data-i18n data-uz="tashkilot: shu jumladan Markaziy bank va Infineon (Germaniya)" data-en="organizations, incl. Central Bank & Infineon (Germany)">tashkilot: shu jumladan Markaziy bank va Infineon (Germaniya)</span></div>
+        <div class="stat"><b>1-/2-</b><span data-i18n data-uz="o'rin — Andijon AI, AI500 xakatonlari" data-en="place — Andijon AI, AI500 hackathons">o'rin — Andijon AI, AI500 xakatonlari</span></div>
+      </div>
+    </div>
+
+    <div class="viz-card">
+      <div class="viz-label">
+        <span data-i18n data-uz="TRUTHUZ AI — QAROR CHEGARASI" data-en="TRUTHUZ AI — DECISION BOUNDARY">TRUTHUZ AI — QAROR CHEGARASI</span>
+        <span>0.90 F1</span>
+      </div>
+      <svg class="boundary" viewBox="0 0 380 260" id="boundarySvg">
+        <defs>
+          <clipPath id="clipReal"><path d="M0,0 L380,0 L380,120 Q260,70 190,120 Q120,160 0,140 Z"/></clipPath>
+          <clipPath id="clipFake"><path d="M0,260 L380,260 L380,120 Q260,70 190,120 Q120,160 0,140 Z"/></clipPath>
+        </defs>
+        <rect x="0" y="0" width="380" height="260" fill="none"/>
+        <rect x="0" y="0" width="380" height="260" fill="#5B8CFF" opacity="0.05" clip-path="url(#clipReal)"/>
+        <rect x="0" y="0" width="380" height="260" fill="#FF6B5B" opacity="0.05" clip-path="url(#clipFake)"/>
+        <path d="M0,140 Q120,160 190,120 Q260,70 380,120" fill="none" stroke="#464b5c" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <g id="dots"></g>
+      </svg>
+      <div class="legend">
+        <span><i style="background:#5B8CFF"></i><span data-i18n data-uz="haqiqiy" data-en="real">haqiqiy</span></span>
+        <span><i style="background:#FF6B5B"></i><span data-i18n data-uz="soxta" data-en="fake">soxta</span></span>
+        <span style="margin-left:auto;color:var(--text-faint)" data-i18n data-uz="bitiruv tezisi asosida" data-en="live idea from thesis classifier">bitiruv tezisi asosida</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow" data-i18n data-uz="MEN HAQIMDA" data-en="ABOUT">MEN HAQIMDA</div>
+      <h2 class="sec-title" data-i18n data-uz="Tadqiqotdan — ishlab turgan tizimgacha" data-en="From research to systems that run">Tadqiqotdan — ishlab turgan tizimgacha</h2>
+    </div>
+    <div class="about-text">
+      <p data-i18n
+        data-uz='PDP Universitetida <strong>Sun&#8217;iy intellekt yechimlari va dasturlari</strong> yo&#8217;nalishi bo&#8217;yicha bakalavriatni yakunlamoqdaman (2022&ndash;2026) &mdash; ikkita diplom bilan: O&#8217;zbekiston davlat diplomi va Buyuk Britaniya <strong>BTEC</strong> diplomi.'
+        data-en='I&#8217;m finishing my bachelor&#8217;s degree in <strong>AI Solutions &amp; Software</strong> at PDP University (2022&ndash;2026), graduating with two diplomas &mdash; a Uzbekistan national diploma and a UK <strong>BTEC</strong> diploma.'>
+        PDP Universitetida <strong>Sun&#8217;iy intellekt yechimlari va dasturlari</strong> yo&#8217;nalishi bo&#8217;yicha bakalavriatni yakunlamoqdaman (2022&ndash;2026) &mdash; ikkita diplom bilan: O&#8217;zbekiston davlat diplomi va Buyuk Britaniya <strong>BTEC</strong> diplomi.
+      </p>
+      <p data-i18n
+        data-uz='Hozirda Germaniyaning <strong>Infineon Technologies</strong> kompaniyasida masofaviy DL/AI muhandisi sifatida ishlayman, shu bilan birga <strong>Holitech Agency</strong>da ML/DL loyihalarini olib boraman. Ishim NLP, xavf-tavakkalchilikni tahlil qilish va real vaqt sanoat monitoringi kesishmasida joylashgan &mdash; O&#8217;zbekiston Markaziy banki uchun milliy kredit-risk ma&#8217;lumotlar bazasidan tortib, Germaniyadagi quyosh panellari tarmog&#8217;ini nazorat qiluvchi AI tizimigacha.'
+        data-en='I currently work remotely as a DL/AI Engineer at <strong>Infineon Technologies</strong> (Germany), alongside ML/DL work at <strong>Holitech Agency</strong>. My work sits at the intersection of NLP, risk analysis, and real-time industrial monitoring &mdash; from a national credit-risk dataset for the Central Bank of Uzbekistan to an AI system watching a solar-panel network in Germany.'>
+        Hozirda Germaniyaning <strong>Infineon Technologies</strong> kompaniyasida masofaviy DL/AI muhandisi sifatida ishlayman, shu bilan birga <strong>Holitech Agency</strong>da ML/DL loyihalarini olib boraman. Ishim NLP, xavf-tavakkalchilikni tahlil qilish va real vaqt sanoat monitoringi kesishmasida joylashgan &mdash; O&#8217;zbekiston Markaziy banki uchun milliy kredit-risk ma&#8217;lumotlar bazasidan tortib, Germaniyadagi quyosh panellari tarmog&#8217;ini nazorat qiluvchi AI tizimigacha.
+      </p>
+      <p data-i18n
+        data-uz="Men modelning izolyatsiyada yuqori ko'rsatkich berishidan ko'ra, to'g'ri joriy etilgan va monitoring qilinadigan tizimlarni yaratishga ko'proq ahamiyat beraman."
+        data-en="I care more about a model that&#8217;s correctly deployed and monitored than one that just scores well in isolation.">
+        Men modelning izolyatsiyada yuqori ko'rsatkich berishidan ko'ra, to'g'ri joriy etilgan va monitoring qilinadigan tizimlarni yaratishga ko'proq ahamiyat beraman.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow" data-i18n data-uz="TAJRIBA" data-en="EXPERIENCE">TAJRIBA</div>
+      <h2 class="sec-title" data-i18n data-uz="Ish faoliyati" data-en="Where I've worked">Ish faoliyati</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="t-item">
+        <div class="t-head">
+          <div><span class="t-role" data-i18n data-uz="DL / AI muhandisi" data-en="DL / AI Engineer">DL / AI muhandisi</span> &nbsp;<span class="t-org">Infineon Technologies</span></div>
+          <div class="t-date" data-i18n data-uz="01/2026 — hozir" data-en="01/2026 — Present">01/2026 — hozir</div>
+        </div>
+        <div class="t-loc" data-i18n data-uz="Germaniya · Masofaviy" data-en="Germany · Remote">Germaniya · Masofaviy</div>
+        <ul class="t-list">
+          <li data-i18n data-uz="Kompaniyaning chuqur o'rganish va AI loyihalarida masofadan ishtirok etish" data-en="Contributing remotely to the company's deep-learning and AI initiatives">Kompaniyaning chuqur o'rganish va AI loyihalarida masofadan ishtirok etish</li>
+          <li data-i18n data-uz="Model pipeline va tizimlarga integratsiya bo'yicha ishlar" data-en="Working on model pipelines and system integration">Model pipeline va tizimlarga integratsiya bo'yicha ishlar</li>
+        </ul>
+      </div>
+
+      <div class="t-item">
+        <div class="t-head">
+          <div><span class="t-role" data-i18n data-uz="AI bo'yicha maslahatchi" data-en="AI Advisor">AI bo'yicha maslahatchi</span> &nbsp;<span class="t-org" data-i18n data-uz="Yunusobod tuman hokimligi" data-en="Yunusobod District Administration">Yunusobod tuman hokimligi</span></div>
+          <div class="t-date">12/2025 — 02/2026</div>
+        </div>
+        <div class="t-loc" data-i18n data-uz="Toshkent, O'zbekiston" data-en="Tashkent, Uzbekistan">Toshkent, O'zbekiston</div>
+        <ul class="t-list">
+          <li data-i18n data-uz="Tuman hokimligida sun'iy intellekt bo'yicha maslahatchi sifatida faoliyat yuritdi" data-en="Served as an AI advisor to the district administration">Tuman hokimligida sun'iy intellekt bo'yicha maslahatchi sifatida faoliyat yuritdi</li>
+          <li data-i18n data-uz="Davlat xizmatlarini raqamlashtirish va AI vositalarini joriy etish bo'yicha tavsiyalar berdi" data-en="Advised on digitizing municipal services and introducing AI tools">Davlat xizmatlarini raqamlashtirish va AI vositalarini joriy etish bo'yicha tavsiyalar berdi</li>
+        </ul>
+      </div>
+
+      <div class="t-item">
+        <div class="t-head">
+          <div><span class="t-role" data-i18n data-uz="ML/DL muhandisi" data-en="ML / DL Engineer">ML/DL muhandisi</span> &nbsp;<span class="t-org">Holitech Agency</span></div>
+          <div class="t-date">02/2025 — 03/2026</div>
+        </div>
+        <div class="t-loc" data-i18n data-uz="Toshkent" data-en="Tashkent">Toshkent</div>
+        <ul class="t-list">
+          <li data-i18n data-uz="Mijozlarning biznes muammolari uchun nazorat qilinadigan va nazoratsiz ML modellarini qurdi" data-en="Built supervised & unsupervised ML models for client business problems">Mijozlarning biznes muammolari uchun nazorat qilinadigan va nazoratsiz ML modellarini qurdi</li>
+          <li data-i18n data-uz="Scikit-learn, XGBoost va Pandas yordamida xavfni aniqlash va prognozlash uchun ma'lumot pipeline'larini avtomatlashtirdi" data-en="Automated data pipelines with Scikit-learn, XGBoost and Pandas for risk detection and forecasting">Scikit-learn, XGBoost va Pandas yordamida xavfni aniqlash va prognozlash uchun ma'lumot pipeline'larini avtomatlashtirdi</li>
+          <li data-i18n data-uz="mBERT va transformer modellari yordamida matn klassifikatsiya tizimlarini joriy etdi" data-en="Shipped text classification systems using mBERT and transformer models">mBERT va transformer modellari yordamida matn klassifikatsiya tizimlarini joriy etdi</li>
+        </ul>
+      </div>
+
+      <div class="t-item">
+        <div class="t-head">
+          <div><span class="t-role" data-i18n data-uz="Ma'lumotlar tahlilchisi (amaliyotchi)" data-en="Data Analyst Intern">Ma'lumotlar tahlilchisi (amaliyotchi)</span> &nbsp;<span class="t-org" data-i18n data-uz="O'zbekiston Markaziy banki — Risk departamenti" data-en="Central Bank of Uzbekistan — Risk Dept.">O'zbekiston Markaziy banki — Risk departamenti</span></div>
+          <div class="t-date">05/2024 — 02/2025</div>
+        </div>
+        <div class="t-loc" data-i18n data-uz="Toshkent" data-en="Tashkent">Toshkent</div>
+        <ul class="t-list">
+          <li data-i18n data-uz="Xalqaro ekspertlar bilan risk-nazorat freymvorklari va kredit riski tahlili bo'yicha ishladi" data-en="Worked with international experts on risk-control frameworks and credit risk analysis">Xalqaro ekspertlar bilan risk-nazorat freymvorklari va kredit riski tahlili bo'yicha ishladi</li>
+          <li data-i18n data-uz="O'zbekiston banklari bo'yicha yagona milliy kredit-risk ma'lumotlar bazasini shakllantirishda ishtirok etdi" data-en="Contributed to a unified national credit-risk dataset aggregated across Uzbekistan's banks">O'zbekiston banklari bo'yicha yagona milliy kredit-risk ma'lumotlar bazasini shakllantirishda ishtirok etdi</li>
+          <li data-i18n data-uz="SQL va Pandas bilan bank ma'lumotlarini tozaladi; Risk Fitch tizimi uchun Power BI hisobotlarini qurdi" data-en="Extracted and cleaned bank data with SQL and Pandas; built Power BI reports for the Risk Fitch Data system">SQL va Pandas bilan bank ma'lumotlarini tozaladi; Risk Fitch tizimi uchun Power BI hisobotlarini qurdi</li>
+        </ul>
+      </div>
+
+      <div class="t-item">
+        <div class="t-head">
+          <div><span class="t-role" data-i18n data-uz="Ma'lumotlar tahlilchisi" data-en="Data Analyst">Ma'lumotlar tahlilchisi</span> &nbsp;<span class="t-org">Gidrogeotexnika</span></div>
+          <div class="t-date">11/2023 — 04/2024</div>
+        </div>
+        <div class="t-loc" data-i18n data-uz="Toshkent" data-en="Tashkent">Toshkent</div>
+        <ul class="t-list">
+          <li data-i18n data-uz="Python va C++ yordamida ma'lumot yig'ish va qayta ishlash jarayonlarini qurdi" data-en="Built data collection and processing workflows in Python and C++">Python va C++ yordamida ma'lumot yig'ish va qayta ishlash jarayonlarini qurdi</li>
+          <li data-i18n data-uz="Excel va Power BI hisobotlari bilan yangi kompaniya ma'lumotlar bazasini tuzdi" data-en="Structured a new company database with Excel and Power BI reporting">Excel va Power BI hisobotlari bilan yangi kompaniya ma'lumotlar bazasini tuzdi</li>
+        </ul>
+      </div>
+
+      <div class="t-item">
+        <div class="t-head">
+          <div><span class="t-role" data-i18n data-uz="Ekotizim hamkori" data-en="Ecosystem Partner">Ekotizim hamkori</span> &nbsp;<span class="t-org">IT Park Uzbekistan</span></div>
+          <div class="t-date" data-i18n data-uz="2022 — hozir" data-en="2022 — Present">2022 — hozir</div>
+        </div>
+        <div class="t-loc" data-i18n data-uz="Toshkent" data-en="Tashkent">Toshkent</div>
+        <ul class="t-list">
+          <li data-i18n data-uz="2022-yildan buyon IT Park ekotizimi doirasida loyihalar va xakatonlarda hamkorlikda ishlab kelmoqda" data-en="Collaborating within the IT Park ecosystem on projects and hackathons since 2022">2022-yildan buyon IT Park ekotizimi doirasida loyihalar va xakatonlarda hamkorlikda ishlab kelmoqda</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WORK / PROJECTS -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow" data-i18n data-uz="TANLANGAN LOYIHALAR" data-en="SELECTED WORK">TANLANGAN LOYIHALAR</div>
+      <h2 class="sec-title" data-i18n data-uz="Yakunidan boshigacha qurilgan tizimlar" data-en="Systems built end-to-end">Yakunidan boshigacha qurilgan tizimlar</h2>
+      <p class="sec-desc" data-i18n
+        data-uz="Real bizneslar uchun ishlab chiqarishga joriy etilgan mijoz platformalari, shuningdek shaxsiy va akademik loyihalar."
+        data-en="Client platforms shipped to production for real businesses, plus personal and academic projects.">
+        Real bizneslar uchun ishlab chiqarishga joriy etilgan mijoz platformalari, shuningdek shaxsiy va akademik loyihalar.
+      </p>
+    </div>
+
+    <div class="proj-group-title" data-i18n data-uz="Mijoz platformalari" data-en="Client platforms">Mijoz platformalari</div>
+    <div class="proj-grid">
+
+      <div class="card">
+        <div class="card-top"><span class="card-title">TruthUZ AI</span><span class="badge">Kun.uz</span></div>
+        <div class="card-role" data-i18n data-uz="AI/ML muhandisi (yakka o'zim qurdim) · Python, NLP, ML+DL" data-en="AI / ML Developer (built solo) · Python, NLP, ML + DL">AI/ML muhandisi (yakka o'zim qurdim) · Python, NLP, ML+DL</div>
+        <p class="card-desc" data-i18n
+          data-uz="O'zbekiston yirik yangiliklar nashrlaridan biri uchun dezinformatsiyani aniqlash tizimi. Gibrid ML/DL/NLP pipeline yangilikni tarixiy va ko'p tilli manbalar bilan solishtirib, mumkin bo'lgan soxta xabarni belgilaydi va da'vo qayerdan tarqalganini kuzatadi — avtomatik tarjima orqali chet tilidagi manbalar ham tekshiriladi."
+          data-en="A fact-checking system for one of Uzbekistan's largest news outlets. A hybrid ML/DL/NLP pipeline cross-checks incoming news against historical and cross-language sources, flags likely misinformation, and traces where a claim first entered circulation — with automatic translation so foreign-language sources can be checked too.">
+          O'zbekiston yirik yangiliklar nashrlaridan biri uchun dezinformatsiyani aniqlash tizimi. Gibrid ML/DL/NLP pipeline yangilikni tarixiy va ko'p tilli manbalar bilan solishtirib, mumkin bo'lgan soxta xabarni belgilaydi va da'vo qayerdan tarqalganini kuzatadi — avtomatik tarjima orqali chet tilidagi manbalar ham tekshiriladi.
+        </p>
+        <div class="tech-row"><span class="tech">Python</span><span class="tech">NLP</span><span class="tech">mBERT</span><span class="tech">FastAPI</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><span class="card-title">ZimZim</span><span class="badge coral" data-i18n data-uz="maxfiy mijoz" data-en="confidential client">maxfiy mijoz</span></div>
+        <div class="card-role" data-i18n data-uz="Backend Python dasturchisi · Python, backend, ma'lumotlar bazasi" data-en="Backend Python Developer · Python, backend services, databases">Backend Python dasturchisi · Python, backend, ma'lumotlar bazasi</div>
+        <p class="card-desc" data-i18n
+          data-uz="Kafe, dorixona va kichik-o'rta bizneslar uchun onlayn biznes-boshqaruv platformasi: real vaqtda ombor nazorati, kunlik/oylik/yillik foyda-zarar hisobotlari va xodimlar samaradorligini (masalan, har bir kassir yopgan buyurtmalar sonini) kuzatish. Buning barchasini boshqaradigan backendni qurdim."
+          data-en="An online business-operations platform for shops, cafes and pharmacies: live inventory tracking, automatic daily / monthly / yearly profit-and-loss reporting, and staff-level order tracking. Built the backend that powers all of it.">
+          Kafe, dorixona va kichik-o'rta bizneslar uchun onlayn biznes-boshqaruv platformasi: real vaqtda ombor nazorati, kunlik/oylik/yillik foyda-zarar hisobotlari va xodimlar samaradorligini (masalan, har bir kassir yopgan buyurtmalar sonini) kuzatish. Buning barchasini boshqaradigan backendni qurdim.
+        </p>
+        <div class="tech-row"><span class="tech">Python</span><span class="tech">PostgreSQL</span><span class="tech">Backend</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><span class="card-title" data-i18n data-uz="Germaniya quyosh AI" data-en="Germany Solar AI">Germaniya quyosh AI</span><span class="badge">Infineon</span></div>
+        <div class="card-role" data-i18n data-uz="DL/AI muhandisi · Python, vaqt qatorlari, monitoring" data-en="DL / AI Engineer · Python, time-series, monitoring">DL/AI muhandisi · Python, vaqt qatorlari, monitoring</div>
+        <p class="card-desc" data-i18n
+          data-uz="Germaniyadagi quyosh panellari tarmog'idan yig'ilgan ma'lumotlar asosida AI model quryapman: qayerda va nima sababdan nosozlik yoki quvvat yo'qotilishi yuz berayotganini aniqlash, quyosh energiyasini tezroq yig'ish va uzoqroq saqlash samaradorligini oshirish."
+          data-en="Building an AI model on data collected across a solar-panel network in Germany — detecting where and why faults or energy loss occur, and improving how quickly panels capture and how long they retain stored power.">
+          Germaniyadagi quyosh panellari tarmog'idan yig'ilgan ma'lumotlar asosida AI model quryapman: qayerda va nima sababdan nosozlik yoki quvvat yo'qotilishi yuz berayotganini aniqlash, quyosh energiyasini tezroq yig'ish va uzoqroq saqlash samaradorligini oshirish.
+        </p>
+        <div class="tech-row"><span class="tech">Python</span><span class="tech">Time-Series ML</span><span class="tech">IoT Data</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><span class="card-title">Systeam AI</span><span class="badge coral" data-i18n data-uz="maxfiy mijoz" data-en="confidential client">maxfiy mijoz</span></div>
+        <div class="card-role" data-i18n data-uz="AI/ML muhandisi · Python, sensor ma'lumotlari, anomaliya aniqlash" data-en="AI / ML Engineer · Python, sensor data, anomaly detection">AI/ML muhandisi · Python, sensor ma'lumotlari, anomaliya aniqlash</div>
+        <p class="card-desc" data-i18n
+          data-uz="Zavod va korxonalardagi katta-kichik robot, stanok va uskunalarni real vaqtda nazorat qiluvchi AI tizim: ular qanday ishlayotganini, qayerda va nima sababdan xato yoki buzilish yuz berayotganini avtomatik aniqlaydi."
+          data-en="An AI system that monitors industrial robots, CNC machines and equipment in factories in real time — automatically detecting how they're operating and where errors or breakdowns are occurring.">
+          Zavod va korxonalardagi katta-kichik robot, stanok va uskunalarni real vaqtda nazorat qiluvchi AI tizim: ular qanday ishlayotganini, qayerda va nima sababdan xato yoki buzilish yuz berayotganini avtomatik aniqlaydi.
+        </p>
+        <div class="tech-row"><span class="tech">Python</span><span class="tech">Anomaly Detection</span><span class="tech">Automation</span></div>
+      </div>
+    </div>
+
+    <div class="proj-group-title" data-i18n data-uz="Shaxsiy va akademik loyihalar" data-en="Personal & academic projects">Shaxsiy va akademik loyihalar</div>
+    <div class="proj-grid">
+
+      <div class="card">
+        <div class="card-top"><span class="card-title" data-i18n data-uz="O'zbekcha soxta yangiliklarni aniqlash" data-en="Uzbek Fake News Detection">O'zbekcha soxta yangiliklarni aniqlash</span><span class="badge">90% F1</span></div>
+        <div class="card-role" data-i18n data-uz="Bitiruv tezisi · Python, NLP, FastAPI" data-en="Bachelor's thesis · Python, NLP, FastAPI">Bitiruv tezisi · Python, NLP, FastAPI</div>
+        <p class="card-desc" data-i18n
+          data-uz="TF-IDF + Logistic Regression klassifikatori, FastAPI mikroservis arxitekturasida (imlo tekshiruvchi, bashoratchi, gibrid baholovchi, gateway) joriy etilgan. Skanerlangan lug'atdan tozalab chiqilgan 83,906 qatorli o'zbekcha imlo ma'lumotlar to'plamini o'zim yaratdim. TruthUZ AI shu tadqiqot asosida qurilgan."
+          data-en="A TF-IDF + Logistic Regression classifier wrapped in a FastAPI microservice architecture (spell-checker, predictor, hybrid scorer, gateway), deployed live. Includes a custom-built 83,906-row Uzbek spelling dataset extracted and cleaned from a scanned print dictionary. TruthUZ AI is built on this research.">
+          TF-IDF + Logistic Regression klassifikatori, FastAPI mikroservis arxitekturasida (imlo tekshiruvchi, bashoratchi, gibrid baholovchi, gateway) joriy etilgan. Skanerlangan lug'atdan tozalab chiqilgan 83,906 qatorli o'zbekcha imlo ma'lumotlar to'plamini o'zim yaratdim. TruthUZ AI shu tadqiqot asosida qurilgan.
+        </p>
+        <div class="tech-row"><span class="tech">Python</span><span class="tech">FastAPI</span><span class="tech">Scikit-learn</span><span class="tech">NLP</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><span class="card-title">VESTO AI</span><span class="badge coral" data-i18n data-uz="Prezident AI mukofoti nomzodi" data-en="President AI Award nominee">Prezident AI mukofoti nomzodi</span></div>
+        <div class="card-role" data-i18n data-uz="Founder · Python, LLM, agentlar, avtomatlashtirish" data-en="Founder · Python, LLM, agents, automation">Founder · Python, LLM, agentlar, avtomatlashtirish</div>
+        <p class="card-desc" data-i18n
+          data-uz="O'zim uchun quryapgan shaxsiy AI-agent tizimi — real vaqtda ishlaydigan, Jarvisga o'xshash yordamchi bo'lib, avtomatlashtirish va qaror qabul qilishni birlashtiradi. Prezident AI mukofoti 2026 uchun startap sifatida taqdim etilmoqda."
+          data-en="A personal AI-agent system I'm building for myself — a real-time, Jarvis-style assistant combining automation and decision support. Being submitted as a startup candidate for the President's AI Award 2026.">
+          O'zim uchun quryapgan shaxsiy AI-agent tizimi — real vaqtda ishlaydigan, Jarvisga o'xshash yordamchi bo'lib, avtomatlashtirish va qaror qabul qilishni birlashtiradi. Prezident AI mukofoti 2026 uchun startap sifatida taqdim etilmoqda.
+        </p>
+        <div class="tech-row"><span class="tech">Python</span><span class="tech">LLM</span><span class="tech">Agents</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><span class="card-title" data-i18n data-uz="DTM Test AI" data-en="DTM Test AI">DTM Test AI</span><span class="badge" data-i18n data-uz="yakka loyiha" data-en="solo build">yakka loyiha</span></div>
+        <div class="card-role" data-i18n data-uz="Founder & muhandis · Python, AI, EdTech" data-en="Founder & Engineer · Python, AI, EdTech">Founder & muhandis · Python, AI, EdTech</div>
+        <p class="card-desc" data-i18n
+          data-uz="Maktab o'quvchilari uchun DTM uslubidagi test savollarini generatsiya qiladigan va imtihonga tayyorlaydigan AI dastur — backenddan savol generatsiya logikasigacha yakka o'zim qurdim."
+          data-en="An AI program that generates and prepares DTM-style test questions for school students preparing for national exams — built entirely solo, from the backend to the question-generation logic.">
+          Maktab o'quvchilari uchun DTM uslubidagi test savollarini generatsiya qiladigan va imtihonga tayyorlaydigan AI dastur — backenddan savol generatsiya logikasigacha yakka o'zim qurdim.
+        </p>
+        <div class="tech-row"><span class="tech">Python</span><span class="tech">AI</span><span class="tech">EdTech</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><span class="card-title" data-i18n data-uz="Marketing AI platformasi" data-en="Marketing AI Platform">Marketing AI platformasi</span><span class="badge" data-i18n data-uz="bozorga tayyor" data-en="market-ready">bozorga tayyor</span></div>
+        <div class="card-role" data-i18n data-uz="Founder · Python, generativ AI" data-en="Founder · Python, generative AI">Founder · Python, generativ AI</div>
+        <p class="card-desc" data-i18n
+          data-uz="Kichik va o'rta bizneslar uchun AI marketing yordamchisi: Instagram, YouTube va Telegram uchun rasm va video kontent yaratadi hamda SMM va reklama strategiyasini rejalashtiradi. Hozir bozorga chiqarishga tayyorlanmoqda."
+          data-en="An AI marketing assistant for small and medium businesses: generates image and video content and plans SMM and ad-targeting strategy across Instagram, YouTube and Telegram. Currently preparing for market launch.">
+          Kichik va o'rta bizneslar uchun AI marketing yordamchisi: Instagram, YouTube va Telegram uchun rasm va video kontent yaratadi hamda SMM va reklama strategiyasini rejalashtiradi. Hozir bozorga chiqarishga tayyorlanmoqda.
+        </p>
+        <div class="tech-row"><span class="tech">Python</span><span class="tech">Generative AI</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HACKATHONS -->
+<section id="hackathons">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow" data-i18n data-uz="XAKATONLAR VA E'TIROF" data-en="HACKATHONS & RECOGNITION">XAKATONLAR VA E'TIROF</div>
+      <h2 class="sec-title" data-i18n data-uz="Musobaqalarda tasdiqlangan natijalar" data-en="Results, proven under pressure">Musobaqalarda tasdiqlangan natijalar</h2>
+    </div>
+    <div class="hack-grid">
+      <div class="hack-card">
+        <div class="hack-rank">🥇 1</div>
+        <div class="hack-name">Andijon AI</div>
+        <div class="hack-desc" data-i18n data-uz="Mintaqaviy AI xakatoni" data-en="Regional AI hackathon">Mintaqaviy AI xakatoni</div>
+      </div>
+      <div class="hack-card">
+        <div class="hack-rank">🥈 2</div>
+        <div class="hack-name" data-i18n data-uz="IT Park × Markaziy bank" data-en="IT Park × Central Bank">IT Park × Markaziy bank</div>
+        <div class="hack-desc" data-i18n data-uz="Bank risk skoringini yaxshilash bo'yicha qo'shma xakaton" data-en="Joint hackathon — improving bank risk scoring">Bank risk skoringini yaxshilash bo'yicha qo'shma xakaton</div>
+      </div>
+      <div class="hack-card">
+        <div class="hack-rank">🥈 2</div>
+        <div class="hack-name">AI500</div>
+        <div class="hack-desc" data-i18n data-uz="Milliy AI xakatoni" data-en="National AI hackathon">Milliy AI xakatoni</div>
+      </div>
+      <div class="hack-card">
+        <div class="hack-rank">🏆</div>
+        <div class="hack-name">IT Park</div>
+        <div class="hack-desc" data-i18n data-uz="Eng yaxshi Python dasturchi / AI maslahatchi nomzodi sifatida e'tirof etildi" data-en="Recognized as top Python developer / AI advisor candidate">Eng yaxshi Python dasturchi / AI maslahatchi nomzodi sifatida e'tirof etildi</div>
+      </div>
+    </div>
+    <div class="award-strip">
+      <div class="ic">🧠</div>
+      <div>
+        <b data-i18n data-uz="Prezident AI mukofoti 2026 — nomzod" data-en="President AI Award 2026 — Nominee">Prezident AI mukofoti 2026 — nomzod</b>
+        <span data-i18n data-uz="VESTO AI startapi bilan taqdim etilmoqda" data-en="Submitted with the VESTO AI startup">VESTO AI startapi bilan taqdim etilmoqda</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow" data-i18n data-uz="KO'NIKMALAR" data-en="SKILLS">KO'NIKMALAR</div>
+      <h2 class="sec-title" data-i18n data-uz="Texnik stack" data-en="Technical stack">Texnik stack</h2>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-cat">
+        <h4 data-i18n data-uz="ML va Data Science" data-en="ML & Data Science">ML va Data Science</h4>
+        <div class="skill-tags">
+          <span>Machine Learning</span><span>Deep Learning</span><span>NLP</span><span>Transformers / BERT</span><span data-i18n data-uz="Feature Engineering" data-en="Feature Engineering">Feature Engineering</span><span data-i18n data-uz="Statistika" data-en="Statistics">Statistika</span><span data-i18n data-uz="Risk tahlili" data-en="Risk Analysis">Risk tahlili</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h4 data-i18n data-uz="Muhandislik" data-en="Engineering">Muhandislik</h4>
+        <div class="skill-tags">
+          <span>Python</span><span>SQL</span><span>FastAPI</span><span>Next.js</span><span>Docker</span><span>Kubernetes</span><span>Git / GitHub</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h4 data-i18n data-uz="AI vositalari" data-en="AI Tools">AI vositalari</h4>
+        <div class="skill-tags">
+          <span>PyTorch</span><span>TensorFlow</span><span>LangChain</span><span>OpenAI</span><span>Scikit-learn</span><span>XGBoost</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h4 data-i18n data-uz="Ma'lumotlar bazasi" data-en="Databases">Ma'lumotlar bazasi</h4>
+        <div class="skill-tags">
+          <span>PostgreSQL</span><span>MongoDB</span><span>MySQL</span><span>Redis</span><span>ChromaDB</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h4 data-i18n data-uz="Cloud va DevOps" data-en="Cloud & DevOps">Cloud va DevOps</h4>
+        <div class="skill-tags">
+          <span>Docker</span><span>Linux</span><span>GitHub Actions</span><span>Nginx</span><span>Azure</span><span>AWS</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h4 data-i18n data-uz="Analitika" data-en="Analytics">Analitika</h4>
+        <div class="skill-tags">
+          <span>Pandas / NumPy</span><span>Power BI</span><span>Matplotlib</span><span>Jupyter</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <h2 data-i18n data-uz="Birga biror narsa quramizmi?" data-en="Let's build something that ships.">Birga biror narsa quramizmi?</h2>
+      <p data-i18n
+        data-uz="Data Scientist, ML muhandisi va AI maslahatchisi sifatida O'zbekiston va xalqaro loyihalarda ishlashga ochiqman."
+        data-en="Open to Data Scientist, ML Engineer and AI Advisor roles — with Uzbek and international teams.">
+        Data Scientist, ML muhandisi va AI maslahatchisi sifatida O'zbekiston va xalqaro loyihalarda ishlashga ochiqman.
+      </p>
+      <div class="contact-links">
+        <a class="clink" href="mailto:xalimjonovxojimurod1@gmail.com">✉ xalimjonovxojimurod1@gmail.com</a>
+        <a class="clink" href="tel:+998910016253">📞 +998 91 001 62 53</a>
+        <a class="clink" href="https://t.me/Xalimjonov_Xojimurod" target="_blank">Telegram — @Xalimjonov_Xojimurod</a>
+        <a class="clink" href="https://github.com/XojimurodXalimjonov001" target="_blank">GitHub</a>
+        <a class="clink" href="https://www.linkedin.com/in/xojimurod-xalimjonov-b7b215413" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span data-i18n data-uz="© 2026 Xojimurod Xalimjonov · Toshkent, O'zbekiston" data-en="© 2026 Xojimurod Xalimjonov · Tashkent, Uzbekistan">© 2026 Xojimurod Xalimjonov · Toshkent, O'zbekiston</span>
+</footer>
+
+<script>
+  // Language toggle
+  const toggle = document.getElementById('langToggle');
+  toggle.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if(!btn) return;
+    const lang = btn.dataset.lang;
+    toggle.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const val = el.dataset[lang];
+      if(val !== undefined) el.innerHTML = val;
+    });
+    document.documentElement.lang = lang;
+  });
+
+  // Decision boundary hero dots
+  const dotsG = document.getElementById('dots');
+  const points = [];
+  function boundaryY(x){
+    // approximate the same curve as the drawn path
+    if(x < 190) return 140 - (x/190)*(140-120) - Math.sin(x/40)*8;
+    return 120 + ((x-190)/190)*0 - Math.sin(x/40)*8;
+  }
+  for(let i=0;i<46;i++){
+    const x = Math.random()*370+5;
+    const yb = 140 - (x/380)*20 - Math.sin(x/55)*22;
+    const isReal = Math.random() < 0.9 ? (Math.random()*260 < yb) : (Math.random()*260 >= yb);
+    let y;
+    if(isReal){ y = Math.max(10, yb - Math.random()*90); }
+    else { y = Math.min(250, yb + Math.random()*90); }
+    const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 3.2);
+    c.setAttribute('fill', isReal ? '#5B8CFF' : '#FF6B5B');
+    c.setAttribute('opacity', '0.85');
+    dotsG.appendChild(c);
+    points.push({el:c, x, y, phase:Math.random()*Math.PI*2});
+  }
+  let t = 0;
+  function animate(){
+    t += 0.012;
+    points.forEach(p => {
+      const dy = Math.sin(t + p.phase) * 2.2;
+      p.el.setAttribute('cy', p.y + dy);
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+</script>
+
+</body>
+</html>
